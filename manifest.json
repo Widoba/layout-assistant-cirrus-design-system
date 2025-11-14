@@ -1,0 +1,21 @@
+{
+  "name": "Layout Assistant - Cirrus Design System",
+  "id": "1552444063506789991",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": [
+    "figma"
+  ],
+  "documentAccess": "dynamic-page",
+  "permissions": [
+    "activeusers",
+    "currentuser",
+    "teamlibrary"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}
