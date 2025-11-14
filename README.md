@@ -2,6 +2,21 @@
 
 A Figma plugin that automatically applies layout variables from the Cirrus Design System to frames with auto-layout, streamlining your design workflow with intelligent prefix detection and batch processing.
 
+<div align="center">
+  <img src="src/assets/cover @50 960px.png" alt="Layout Assistant Cover" width="100%">
+</div>
+
+<table>
+<tr>
+<td width="50%">
+  <img src="src/assets/shot-01 @100 1920px.png" alt="Screenshot 1" width="100%">
+</td>
+<td width="50%">
+  <img src="src/assets/shot 02 @100 1920px.png" alt="Screenshot 2" width="100%">
+</td>
+</tr>
+</table>
+
 ## Overview
 
 **Layout Assistant** automates the application of design tokens (spacing, padding, corner radius) to Figma frames based on their naming conventions. Instead of manually binding variables to each frame, you can batch-apply layout tokens across entire component hierarchies with a single click.
