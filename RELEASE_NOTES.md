@@ -1,82 +1,60 @@
-# Release Notes - Version 1.2.0
+# Changelog
 
-## ✨ What's New
+All notable changes to this project will be documented in this file.
 
-**Centralized Design Token System**
-- Complete migration to primitive → semantic token architecture
-- All color values now centralized in `DESIGN_TOKENS` object for single source of truth
-- Semantic tokens (`--semantic-*`) reference primitive color scales for maintainability
-- Full light/dark mode support with automatic switching
-- Backward compatibility maintained through token aliases
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-**Centralized UI State Management**
-- New `updateUIState()` function orchestrates all UI component visibility and state
-- `getUIMode()` provides consistent mode detection (setup/adjust/spacing/none)
-- Eliminates scattered DOM manipulations across 15+ locations
-- Improved state synchronization and reduced inconsistencies
-- Better debugging capabilities with centralized logging
+## [1.2.0] - 2024
 
-## 🔧 Improvements
+### Added
+- Centralized design token system with primitive → semantic token architecture
+- Centralized UI state management via `updateUIState()` function
+- Light/dark mode support with automatic switching
+- Comprehensive token documentation
 
-**Code Architecture**
+### Changed
 - Refactored color system from 517 hardcoded values to centralized token system
 - Replaced 137 scattered `setProperty` calls with systematic token application
 - Consolidated UI state management from 15+ manual toggles to single function
-- Enhanced maintainability with single source of truth for colors and UI state
 
-**Developer Experience**
-- Comprehensive token documentation in `cirrus-token-injector-colorTokens.md`
-- Clear primitive → semantic token hierarchy
-- Improved code organization and type safety
-- Better error handling and validation
+### Fixed
+- Inconsistent UI state updates across different interaction paths
+- Dropdown visibility issues in mode transitions
+- Layout container enable/disable state synchronization
+- Option buttons visibility inconsistencies
 
-**Performance**
-- Optimized token application with recursive property setting
-- Reduced redundant DOM operations through centralized state management
-- Faster mode transitions with consolidated logic
+## [1.1.0] - 2024
 
-## 🐛 Bug Fixes
+### Added
+- Resizable plugin window with drag-to-resize functionality
+- Responsive layout system (vertical for narrow windows, horizontal for wide)
+- Minimum window size enforcement (360px × 300px)
 
-- Fixed inconsistent UI state updates across different interaction paths
-- Resolved dropdown visibility issues in mode transitions
-- Improved layout container enable/disable state synchronization
-- Fixed option buttons visibility inconsistencies
+### Changed
+- Improved plugin responsiveness and variable application speed
+- Enhanced visual feedback and state indicators
 
----
+### Fixed
+- Variable application issues in complex nested hierarchies
+- Edge cases in prefix detection and naming
+- Compatibility issues with various Figma file structures
 
-# Release Notes - Version 1.1.0
+## [1.0.0] - 2024
 
-## ✨ What's New
+### Added
+- Setup Mode with automatic activation for unprefixed frames
+- Intelligent prefix suggestions based on parent container hierarchy
+- One-click setup: rename frames and apply tokens in single action
+- Auto detection for hierarchy level based on parent context
+- Pre-configured defaults for layout controls
 
-**Resizable Plugin Window**
-- Drag to resize the plugin window using the bottom-right corner handle
-- Customize width and height to fit your workflow
-- Minimum size enforced (360px × 300px) to keep controls accessible
-
-**Responsive Layout System**
-- Adaptive UI that adjusts based on window width
-- Vertical layout for narrow windows (<640px)
-- Horizontal 3-column layout for wide windows (≥640px)
-- Smooth transitions when resizing
-
-## 🔧 Improvements
-
-- Faster variable application and plugin responsiveness
-- Better error handling and user feedback
-- Performance optimizations for nested frames and batch operations
-- Enhanced visual feedback and clearer state indicators
-
-## 🐛 Bug Fixes
-
-- Fixed variable application issues in complex nested hierarchies
-- Resolved edge cases in prefix detection and naming
-- Improved compatibility with various Figma file structures
+### Changed
+- Improved UI/UX for prefix selection workflow
+- Enhanced context awareness for frame hierarchy
 
 ---
 
-**Previous Version Highlights:**
-- Version 1.0.0: Setup Mode with automatic prefix detection and intelligent hierarchy suggestions
-
-
-
-
+[1.2.0]: https://github.com/Widoba/layout-assistant-cirrus-design-system/releases/tag/v1.2.0
+[1.1.0]: https://github.com/Widoba/layout-assistant-cirrus-design-system/releases/tag/v1.1.0
+[1.0.0]: https://github.com/Widoba/layout-assistant-cirrus-design-system/releases/tag/v1.0.0

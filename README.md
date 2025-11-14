@@ -1,227 +1,124 @@
 # Layout Assistant - Cirrus Design System
 
-A Figma plugin that automatically applies layout variables from the "Cirrus - Native Design System" team library to selected frames with auto-layout. Streamline your design workflow with intelligent prefix detection, automatic mode selection, and batch processing of nested frames.
+A Figma plugin that automatically applies layout variables from the Cirrus Design System to frames with auto-layout, streamlining your design workflow with intelligent prefix detection and batch processing.
 
-## ✨ Features
+## Overview
 
-### Core Functionality
-- **Automatic Variable Application**: Applies spacing, padding, and corner-radius variables from the **"A1 📐 Layout"** collection (with backwards compatibility for "📐 Layout" and "A6 - Layout")
-- **Intelligent Mode Detection**: Automatically sets variable modes based on frame name prefixes:
-  - `parent.*` → Mode: "parent (default)"
-  - `child.*` → Mode: "child"
-  - `subChild.*` → Mode: "sub-child"
-  - `hero.*` → Mode: "hero"
-- **Master Collection Mode Setting**: Sets modes for master collections (A1 📐 Layout, A2 📦 Padding, A3 ↔️ Spacing, A4 ╭ Corner Radius) for manual adjustment
-- **Primitive Collection Mode Setting**: Sets modes for primitive collections (spacing-primitive, padding-primitive, corner-radius-primitive) based on hierarchy level
-- **Recursive Processing**: Applies variables to all nested frames with auto-layout and allowed names
-- **Batch Operations**: Supports processing multiple selected frames and their children simultaneously
+**Layout Assistant** automates the application of design tokens (spacing, padding, corner radius) to Figma frames based on their naming conventions. Instead of manually binding variables to each frame, you can batch-apply layout tokens across entire component hierarchies with a single click.
 
-### Setup Mode (v1.0.0+)
-- **Automatic Activation**: Activates when selecting frames without prefixes
-- **Intelligent Prefix Suggestions**: Filters prefix options based on parent container hierarchy
-- **One-Click Setup**: Rename frames and apply layout tokens in a single action
-- **Auto Detection**: Automatically determines correct hierarchy level based on parent context
-- **Pre-Configured Defaults**: Layout controls pre-selected for faster setup
+### Why Use It?
 
-### Resizable Window (v1.1.0+)
-- **Drag to Resize**: Adjust plugin window size using the bottom-right corner handle
-- **Flexible Dimensions**: Customize width and height to fit your workflow
-- **Smart Minimums**: Maintains minimum size (360px × 300px) for accessibility
-- **Responsive Layout**: 
-  - Vertical layout for narrow windows (<640px)
-  - Horizontal 3-column layout for wide windows (≥640px)
+- **Save Time**: Apply layout tokens to multiple frames and nested children simultaneously
+- **Consistency**: Ensures all frames use the correct design system variables
+- **Intelligent**: Automatically detects frame hierarchy and applies appropriate variable modes
+- **Flexible**: Works with prefixed frames or helps set up new frames with Setup Mode
 
-### Centralized Design System (v1.2.0+)
-- **Primitive → Semantic Token Architecture**: Complete migration to centralized token system
-- **Single Source of Truth**: All color values centralized in `DESIGN_TOKENS` object
-- **Light/Dark Mode Support**: Automatic mode switching
-- **Centralized UI State Management**: Single function orchestrates all UI component visibility
-- **Improved Maintainability**: Reduced from 517 hardcoded values to systematic token application
+### When to Use It?
 
-## 📋 Prerequisites
+- Setting up new components with layout tokens
+- Applying design system updates across existing components
+- Ensuring consistency in component libraries
+- Batch processing multiple frames with auto-layout
 
-- The **"Cirrus - Native Design System"** team library must be enabled in your Figma file
-- The library must contain the following collections:
+### How It Works
 
-### Required Collections
+1. **Frame Naming**: Frames are named with prefixes (`parent.*`, `child.*`, `subChild.*`, `hero.*`) that indicate their hierarchy level
+2. **Variable Application**: The plugin finds matching frames and applies layout variables (`spacing`, `padding`, `corner-radius`) from the Cirrus Design System
+3. **Mode Setting**: Automatically sets variable modes based on the frame's prefix, ensuring correct token values for each hierarchy level
+4. **Batch Processing**: Recursively processes nested frames, applying tokens throughout the component structure
 
-**Layout Collection (Primary):**
-- **"A1 📐 Layout"** (or fallback: "📐 Layout", "A6 - Layout") containing:
-  - `spacing` (or variable with "spacing" in name) - Applied to frame item spacing
-  - `padding` (or variable with "padding" in name) - Applied to all frame padding properties
-  - `corner-radius` / `cornerRadius` / `corner radius` (or variable with "corner" or "radius" in name) - Applied to all frame corner radius properties
+### Basic Concepts
 
-**Master Collections (for manual mode adjustment):**
-- **"A1 📐 Layout"** - Layout preset modes
-- **"A2 📦 Padding"** - Padding adjustment modes
-- **"A3 ↔️ Spacing"** - Spacing adjustment modes
-- **"A4 ╭ Corner Radius"** - Corner radius adjustment modes
+- **Layout Collection**: Contains the actual variable values (`spacing`, `padding`, `corner-radius`) bound to frame properties
+- **Master Collections**: Control modes for manual adjustment in Figma's UI (A1-A4 collections)
+- **Primitive Collections**: Used for hierarchy-based mode setting based on frame prefixes
+- **Prefix Hierarchy**: `parent.*` → `child.*` → `subChild.*` determines which variable modes are applied
 
-**Primitive Collections (for hierarchy-based mode setting):**
-- **"spacing-primitive"** (or fallback: "A1 - ↔️ Spacing")
-- **"padding-primitive"** (or fallback: "A4 - 🧩 Padding")
-- **"corner-radius-primitive"** (or fallback: "A5 - ╭ Corner Radius")
+## Quick Start
 
-### Frame Naming
-- Frames must be named with one of the allowed prefixes (`parent.*`, `child.*`, `subChild.*`, `hero.*`) OR use Setup Mode for unprefixed frames
+### Prerequisites
 
-## 🚀 Installation
+- Figma file with the **"Cirrus - Native Design System"** team library enabled
+- Library must contain the **"A1 📐 Layout"** collection with `spacing`, `padding`, and `corner-radius` variables
 
-1. Clone this repository:
+### Installation
+
+1. Clone and build:
    ```bash
    git clone https://github.com/Widoba/layout-assistant-cirrus-design-system.git
    cd layout-assistant-cirrus-design-system
-   ```
-
-2. Install dependencies:
-   ```bash
    npm install
-   ```
-
-3. Build the plugin:
-   ```bash
    npm run build
    ```
 
-4. In Figma, go to **Plugins → Development → Import plugin from manifest**
-5. Select the `manifest.json` file from this project
+2. Import in Figma:
+   - Go to **Plugins → Development → Import plugin from manifest**
+   - Select the `manifest.json` file
 
-## 💻 Development
+### Basic Usage
+
+1. Name frames with allowed prefixes:
+   - `parent.header`, `parent.main`
+   - `child.card`, `child.section`
+   - `subChild.button`, `subChild.text`
+   - `hero.banner`, `hero.cta`
+
+2. Select frames and run the plugin
+
+3. Click **"Apply Variables"** to batch-apply layout tokens
+
+### Setup Mode
+
+For frames without prefixes, Setup Mode automatically activates:
+- Select unprefixed frames
+- Choose a prefix from the dropdown (or use "Auto" for automatic detection)
+- Apply variables to rename and set tokens in one step
+
+## Features
+
+- **Automatic Variable Application**: Applies spacing, padding, and corner-radius variables from the A1 📐 Layout collection
+- **Intelligent Mode Detection**: Sets variable modes based on frame name prefixes
+- **Setup Mode**: Helps set up new frames with guided prefix selection
+- **Batch Processing**: Recursively applies tokens to nested frames
+- **Resizable Window**: Customize plugin window size to fit your workflow
+- **Responsive UI**: Adapts layout based on window width
+
+## Collection Architecture
+
+The plugin uses a multi-collection architecture:
+
+- **Layout Collection (A1 📐 Layout)**: Contains variable values bound to frame properties
+- **Master Collections (A1-A4)**: Control modes for manual adjustment in Figma UI
+- **Primitive Collections**: Used for hierarchy-based mode setting
+
+See [RELEASE_NOTES.md](RELEASE_NOTES.md) for version history and detailed changes.
+
+## Development
 
 ### Quick Start
 
 ```bash
-# Install dependencies
-npm install
-
-# Build for production
-npm run build
-
-# Development mode with auto-rebuild
-npm run dev
+npm install          # Install dependencies
+npm run build       # Build for production
+npm run dev         # Development mode with watch
 ```
-
-### Development UI
-
-The plugin includes a development UI mode that can be toggled using the switch at the bottom of the plugin window. This UI provides a foundation for adding new features with the following sections:
-
-1. **Inside Section** - Top section with a neutral background
-2. **Active Section** - Middle section with a blue-tinted background (highlighted/active state)
-3. **Nested Section** - Bottom expandable section
-
-To switch to the development UI:
-1. Run the plugin
-2. Toggle the "Development UI" switch at the bottom of the plugin window
-
-The development UI provides a consistent layout structure based on the Figma design. When developing new features, add your UI components within these section containers.
 
 ### Project Structure
 
 ```
-layout-assistant-cirrus-design-system/
 ├── src/
-│   ├── code.ts          # Main plugin logic (runs in Figma)
+│   ├── code.ts          # Main plugin logic
 │   ├── ui.html          # Plugin UI interface
 │   └── assets/          # Icons and images
-├── dist/                # Build output (generated, not tracked in git)
-├── doc/                 # Documentation and design tokens
-├── manifest.json        # Plugin configuration
-├── package.json         # Dependencies and scripts
-├── tsconfig.json        # TypeScript configuration
-└── webpack.config.js    # Webpack build configuration
+├── dist/                # Build output (not tracked)
+├── doc/                 # Documentation
+└── manifest.json        # Plugin configuration
 ```
 
-## 📖 Usage
-
-### Basic Usage
-
-1. Open a Figma file with the "Cirrus - Native Design System" library enabled
-2. Name your frames with allowed prefixes:
-   - `parent.header`, `parent.main`, etc.
-   - `child.card`, `child.section`, etc.
-   - `subChild.button`, `subChild.text`, etc.
-   - `hero.banner`, `hero.cta`, etc.
-3. Select one or more frames (the plugin will find matching frames)
-4. Run the plugin from **Plugins → Development → Layout Assistant - Cirrus Design System**
-5. Click **"Apply Variables"** to:
-   - Apply layout tokens (`spacing`, `padding`, `corner-radius`) from the A1 📐 Layout collection
-   - Set variable modes for primitive collections based on frame prefix hierarchy
-   - Set master collection modes (A1-A4) for manual adjustment
-   - Process all nested child frames that meet the criteria
-
-### Setup Mode (for unprefixed frames)
-
-1. Select any frame without a prefix (`parent.`, `child.`, `subChild.`, or `hero.`)
-2. Setup Mode automatically activates
-3. A dropdown appears with prefix options (filtered based on parent hierarchy)
-4. Choose **"Auto"** for automatic detection or select a specific prefix
-5. Adjust layout controls if needed (pre-selected by default)
-6. Click **"Apply Variables"** to rename and apply tokens in one step
-
-### Customizing Layout Controls
-
-The plugin allows you to control which layout properties are applied:
-
-- **Corner Radius**: Toggle individual corners (top-left, top-right, bottom-left, bottom-right)
-- **Padding**: Toggle individual sides (top, bottom, left, right)
-- **Nested Frames**: Apply to nested children recursively
-- **Spacing**: Apply spacing variables to frame item spacing
-
-### Collection Architecture
-
-The plugin uses a multi-collection architecture:
-
-1. **Layout Collection (A1 📐 Layout)**: Contains the actual variable values (`spacing`, `padding`, `corner-radius`) that are bound to frame properties
-2. **Master Collections (A1-A4)**: Control modes for manual adjustment in the Figma UI:
-   - A1 📐 Layout: Preset layout modes
-   - A2 📦 Padding: Padding adjustment modes
-   - A3 ↔️ Spacing: Spacing adjustment modes
-   - A4 ╭ Corner Radius: Corner radius adjustment modes
-3. **Primitive Collections**: Used for hierarchy-based mode setting based on frame prefixes:
-   - `spacing-primitive`: Sets spacing mode based on prefix (parent/child/subChild/hero)
-   - `padding-primitive`: Sets padding mode based on prefix
-   - `corner-radius-primitive`: Sets corner radius mode based on prefix
-
-The plugin automatically handles backwards compatibility with older collection names.
-
-## 🛠️ Technologies Used
-
-- **TypeScript** - Type-safe development
-- **ESBuild** - Fast TypeScript compilation for plugin code
-- **Webpack** - UI bundling and asset management
-- **Figma Plugin API** - Plugin runtime environment
-- **HTML/CSS** - UI implementation
-
-## 📝 Scripts
-
-- `npm run build` - Build both code and UI for production
-- `npm run build:code` - Build plugin code only
-- `npm run build:ui` - Build UI only
-- `npm run dev` - Development mode with watch for both code and UI
-
-## 📚 Documentation
-
-- **[Release Notes](RELEASE_NOTES.md)** - Detailed changelog and version history
-- **[Version Notes](VERSION_NOTES.md)** - User-facing feature documentation
-- **[Design Tokens](doc/cirrus-token-injector-colorTokens.md)** - Token system documentation
-
-## 🗺️ Roadmap
-
-Recent major updates:
-- **v1.2.0**: Centralized design token system and UI state management
-- **v1.1.0**: Resizable window and responsive layout system
-- **v1.0.0**: Setup Mode with intelligent prefix detection
-
-See [RELEASE_NOTES.md](RELEASE_NOTES.md) for complete changelog.
-
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## License
 
 ISC
-
----
-
-**Note**: For the latest release notes and detailed version information, see [RELEASE_NOTES.md](RELEASE_NOTES.md) and [VERSION_NOTES.md](VERSION_NOTES.md).
