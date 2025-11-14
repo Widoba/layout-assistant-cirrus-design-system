@@ -5,12 +5,14 @@ A Figma plugin that automatically applies layout variables from the "Cirrus - Na
 ## ✨ Features
 
 ### Core Functionality
-- **Automatic Variable Application**: Applies spacing, padding, and corner-radius variables from the "A6 - Layout" collection
+- **Automatic Variable Application**: Applies spacing, padding, and corner-radius variables from the **"A1 📐 Layout"** collection (with backwards compatibility for "📐 Layout" and "A6 - Layout")
 - **Intelligent Mode Detection**: Automatically sets variable modes based on frame name prefixes:
   - `parent.*` → Mode: "parent (default)"
   - `child.*` → Mode: "child"
   - `subChild.*` → Mode: "sub-child"
   - `hero.*` → Mode: "hero"
+- **Master Collection Mode Setting**: Sets modes for master collections (A1 📐 Layout, A2 📦 Padding, A3 ↔️ Spacing, A4 ╭ Corner Radius) for manual adjustment
+- **Primitive Collection Mode Setting**: Sets modes for primitive collections (spacing-primitive, padding-primitive, corner-radius-primitive) based on hierarchy level
 - **Recursive Processing**: Applies variables to all nested frames with auto-layout and allowed names
 - **Batch Operations**: Supports processing multiple selected frames and their children simultaneously
 
@@ -38,12 +40,30 @@ A Figma plugin that automatically applies layout variables from the "Cirrus - Na
 
 ## 📋 Prerequisites
 
-- The "Cirrus - Native Design System" team library must be enabled in your Figma file
-- The library must contain an "A6 - Layout" collection with the following variables:
-  - `spacing` - Applied to frame item spacing
-  - `padding` - Applied to all frame padding properties
-  - `corner-radius` - Applied to all frame corner radius properties
-- Frames must be named with one of the allowed prefixes (parent.*, child.*, subChild.*, hero.*) OR use Setup Mode for unprefixed frames
+- The **"Cirrus - Native Design System"** team library must be enabled in your Figma file
+- The library must contain the following collections:
+
+### Required Collections
+
+**Layout Collection (Primary):**
+- **"A1 📐 Layout"** (or fallback: "📐 Layout", "A6 - Layout") containing:
+  - `spacing` (or variable with "spacing" in name) - Applied to frame item spacing
+  - `padding` (or variable with "padding" in name) - Applied to all frame padding properties
+  - `corner-radius` / `cornerRadius` / `corner radius` (or variable with "corner" or "radius" in name) - Applied to all frame corner radius properties
+
+**Master Collections (for manual mode adjustment):**
+- **"A1 📐 Layout"** - Layout preset modes
+- **"A2 📦 Padding"** - Padding adjustment modes
+- **"A3 ↔️ Spacing"** - Spacing adjustment modes
+- **"A4 ╭ Corner Radius"** - Corner radius adjustment modes
+
+**Primitive Collections (for hierarchy-based mode setting):**
+- **"spacing-primitive"** (or fallback: "A1 - ↔️ Spacing")
+- **"padding-primitive"** (or fallback: "A4 - 🧩 Padding")
+- **"corner-radius-primitive"** (or fallback: "A5 - ╭ Corner Radius")
+
+### Frame Naming
+- Frames must be named with one of the allowed prefixes (`parent.*`, `child.*`, `subChild.*`, `hero.*`) OR use Setup Mode for unprefixed frames
 
 ## 🚀 Installation
 
@@ -124,8 +144,9 @@ layout-assistant-cirrus-design-system/
 3. Select one or more frames (the plugin will find matching frames)
 4. Run the plugin from **Plugins → Development → Layout Assistant - Cirrus Design System**
 5. Click **"Apply Variables"** to:
-   - Apply layout tokens to all frames with auto-layout AND allowed name prefixes
-   - Set the appropriate variable mode based on each frame's prefix
+   - Apply layout tokens (`spacing`, `padding`, `corner-radius`) from the A1 📐 Layout collection
+   - Set variable modes for primitive collections based on frame prefix hierarchy
+   - Set master collection modes (A1-A4) for manual adjustment
    - Process all nested child frames that meet the criteria
 
 ### Setup Mode (for unprefixed frames)
@@ -145,6 +166,23 @@ The plugin allows you to control which layout properties are applied:
 - **Padding**: Toggle individual sides (top, bottom, left, right)
 - **Nested Frames**: Apply to nested children recursively
 - **Spacing**: Apply spacing variables to frame item spacing
+
+### Collection Architecture
+
+The plugin uses a multi-collection architecture:
+
+1. **Layout Collection (A1 📐 Layout)**: Contains the actual variable values (`spacing`, `padding`, `corner-radius`) that are bound to frame properties
+2. **Master Collections (A1-A4)**: Control modes for manual adjustment in the Figma UI:
+   - A1 📐 Layout: Preset layout modes
+   - A2 📦 Padding: Padding adjustment modes
+   - A3 ↔️ Spacing: Spacing adjustment modes
+   - A4 ╭ Corner Radius: Corner radius adjustment modes
+3. **Primitive Collections**: Used for hierarchy-based mode setting based on frame prefixes:
+   - `spacing-primitive`: Sets spacing mode based on prefix (parent/child/subChild/hero)
+   - `padding-primitive`: Sets padding mode based on prefix
+   - `corner-radius-primitive`: Sets corner radius mode based on prefix
+
+The plugin automatically handles backwards compatibility with older collection names.
 
 ## 🛠️ Technologies Used
 
